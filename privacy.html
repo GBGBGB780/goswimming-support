@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Go Swimming App privacy policy.">
+  <meta name="theme-color" content="#071114">
+  <title>Go Swimming · Privacy Policy</title>
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Go Swimming home">
+      <img src="assets/app-icon.png" alt="" width="48" height="48">
+      <span>Go Swimming</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="support.html">支持 / Support</a>
+      <a class="active" href="privacy.html">隐私 / Privacy</a>
+    </nav>
+  </header>
+
+  <main class="document policy">
+    <div class="document-title">
+      <p class="eyebrow">Privacy Policy</p>
+      <h1>Go Swimming 隐私政策</h1>
+      <p>生效日期 / Effective date: 2026-08-09</p>
+      <p class="lead">
+        Go Swimming 以本机处理为默认原则，不出售个人数据，不进行跨 App 跟踪，
+        也不将健康数据用于广告。
+      </p>
+      <p class="lead english">
+        Go Swimming is on-device first. It does not sell personal data, track you
+        across apps, or use health data for advertising.
+      </p>
+    </div>
+
+    <section>
+      <h2>1. 我们处理的数据 / Data We Process</h2>
+      <h3>健康与健身 / Health and Fitness</h3>
+      <p>
+        经你授权后，App 可读取游泳训练、距离、划水次数、心率、活动能量、出生日期和
+        生理性别，并可写入你主动记录的训练。开放水域模式会在获得定位和 HealthKit
+        路线权限后记录训练路线。
+      </p>
+      <p class="english">
+        With your permission, the App may read swim workouts, distance, stroke
+        count, heart rate, active energy, date of birth, and biological sex, and
+        write workouts you choose to record. Open-water mode records workout
+        routes after location and HealthKit route access are granted.
+      </p>
+
+      <h3>动作数据 / Motion Data</h3>
+      <p>
+        Apple Watch 使用加速度、旋转和重力数据判断划水、泳姿、休息与距离。默认仅保留
+        通过安全校验的派生特征；原始动作帧默认不保留。只有在你明确开启“记录原始运动数据”
+        后，后续训练才会生成原始动作 JSON。
+      </p>
+      <p class="english">
+        Apple Watch uses acceleration, rotation, and gravity data for stroke,
+        style, rest, and distance decisions. By default, only safety-gated
+        derived features are retained. Raw motion frames are stored only for
+        future workouts after you explicitly enable raw workout data recording.
+      </p>
+
+      <h3>档案与内容 / Profile and Content</h3>
+      <p>
+        用户名、头像、身高、体重、年龄、性别、训练计划、赛后修正和 AI 对话用于提供你
+        选择的本地功能。创建的是设备本地档案，不是云端互联网账号。
+      </p>
+      <p class="english">
+        Username, avatar, height, weight, age, sex, training plans, post-workout
+        corrections, and AI chats support the local features you choose. The
+        profile is local to your device and is not an internet account.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. 存储与设备间传输 / Storage and Device Transfer</h2>
+      <ul>
+        <li>训练记录由 Apple Health 保存。</li>
+        <li>App 派生数据保存在配对的 iPhone 和 Apple Watch 本地。</li>
+        <li>训练和派生特征可通过 Apple WatchConnectivity 在配对设备间传输。</li>
+        <li>本地档案和 AI 对话使用 AES-GCM 加密，密钥保存在设备专属 Keychain。</li>
+        <li>可重新下载的 GGUF 模型和暂存文件不纳入系统备份。</li>
+        <li><code>group.yingying.shared</code> 用于同一开发者且拥有相应授权的 App 共享加密档案和本地模型。</li>
+      </ul>
+      <p class="english">
+        Workout records are stored by Apple Health. App-derived data remains on
+        the paired iPhone and Apple Watch and may transfer through
+        WatchConnectivity. Local profiles and AI chats use AES-GCM encryption
+        with a device-only Keychain key. Apps from the same developer with the
+        <code>group.yingying.shared</code> entitlement can share encrypted local
+        profiles and models. Re-downloadable models and staging files are
+        excluded from backup.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. 网络与第三方服务 / Network and Third-Party Services</h2>
+      <p>
+        当前发布版本的云账号、云同步、远程错误日志和 Spark 在线 AI 保持关闭。
+        当你主动下载本地 AI 模型时，App 会连接模型托管方，例如 Hugging Face 或你选择的
+        下载镜像。模型托管方可能依据其自身政策收到完成网络请求所需的信息，例如 IP 地址。
+      </p>
+      <p class="english">
+        Cloud accounts, cloud sync, remote error logging, and Spark online AI are
+        disabled in the current release. When you choose to download a local AI
+        model, the App connects to a model host such as Hugging Face or the
+        selected download mirror. The host may receive information needed to
+        serve the request, such as an IP address, under its own policy.
+      </p>
+      <p>
+        App 不使用广告 SDK，不出售个人数据，也不使用健康数据进行广告投放或跨 App 跟踪。
+        可下载模型的来源和许可证会在 App 模型中心展示。
+      </p>
+    </section>
+
+    <section>
+      <h2>4. 保留与删除 / Retention and Deletion</h2>
+      <p>
+        数据保留到你删除单条记录、删除本地档案或卸载 App。原始动作导出文件在 iPhone
+        最多保留 10 份或 14 天，以先达到的限制为准。
+      </p>
+      <p>
+        在 App 中删除本地档案会删除该档案的资料、本地训练缓存、AI 分析、AI 对话和徽章
+        进度。已经写入 Apple Health 的训练不会随本地档案自动删除；这类记录需要在
+        Apple Health 或 App 提供的明确删除流程中处理。
+      </p>
+      <p class="english">
+        Data remains until you delete an item, delete the local profile, or
+        uninstall the App. Deleting a local profile removes its local profile
+        data, caches, AI content, and badge progress. Workouts already saved to
+        Apple Health are not automatically removed.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. 你的选择与控制 / Your Choices and Controls</h2>
+      <ul>
+        <li>你可在系统设置中撤回 HealthKit、动作、定位、相机或照片权限。</li>
+        <li>你可关闭个人 IMU 自动训练或原始动作数据采集。</li>
+        <li>你可删除单条训练、本地 AI 模型、AI 对话或整个本地档案。</li>
+        <li>你可选择是否允许使用蜂窝网络下载本地 AI 模型。</li>
+      </ul>
+      <p class="english">
+        You may revoke system permissions, disable personal motion-model
+        training or raw motion capture, remove local AI models and content, or
+        permanently delete a local profile.
+      </p>
+    </section>
+
+    <section>
+      <h2>6. 健康与安全说明 / Health and Safety Notice</h2>
+      <p>
+        Go Swimming 是训练记录和一般健身辅助工具，不是医疗设备、诊断工具、治疗服务、
+        实时救援系统或溺水预警保障。App 的分析和 AI 输出可能不准确，不能替代医生、
+        教练、救生员或紧急服务。
+      </p>
+      <p class="english">
+        Go Swimming is a workout-recording and general fitness tool. It is not a
+        medical device, diagnostic or treatment service, real-time rescue system,
+        or drowning-prevention guarantee. App and AI output may be inaccurate and
+        does not replace qualified professionals or emergency services.
+      </p>
+    </section>
+
+    <section>
+      <h2>7. 政策更新 / Policy Updates</h2>
+      <p>
+        如果未来启用涉及个人数据的云端功能，App 将在启用前提供额外说明并在需要时征得
+        同意。重大政策变化会通过更新本页面或 App 内说明进行通知。
+      </p>
+      <p class="english">
+        Any future cloud feature involving personal data will provide additional
+        notice and obtain consent where required before activation. Material
+        changes will be reflected on this page or in the App.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>8. 联系我们 / Contact</h2>
+      <p>
+        隐私、数据删除或权限相关问题，请联系：
+        <a href="mailto:kampui4app@163.com">kampui4app@163.com</a>
+      </p>
+      <p>
+        For privacy, data deletion, or permission questions, contact
+        <a href="mailto:kampui4app@163.com">kampui4app@163.com</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Go Swimming. All rights reserved.</p>
+    <p><a href="index.html">Home</a> · <a href="support.html">Support</a></p>
+  </footer>
+</body>
+</html>
