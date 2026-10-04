@@ -826,6 +826,10 @@ a {
   transform: scale(1);
 }
 
+.mobile-story-device {
+  display: none;
+}
+
 .story-phone .device-speaker {
   z-index: 6;
 }
@@ -983,6 +987,10 @@ a {
 
 .section-heading-row .section-intro {
   margin-bottom: 6px;
+}
+
+.swipe-guide {
+  display: none;
 }
 
 .watch-gallery {
@@ -2485,6 +2493,16 @@ body:not(.landing-page) {
   }
 }
 
+@keyframes swipe-hint {
+  0%,
+  100% {
+    transform: translateX(-13px);
+  }
+  50% {
+    transform: translateX(13px);
+  }
+}
+
 @media (max-width: 1120px) {
   .site-header {
     grid-template-columns: 1fr auto;
@@ -2601,52 +2619,63 @@ body:not(.landing-page) {
   }
 
   .story-visual {
-    top: 100px;
-    z-index: 4;
-    height: 53vh;
-    min-height: 470px;
-    pointer-events: none;
-    background:
-      linear-gradient(180deg, rgba(6, 17, 29, 0.98) 76%, transparent);
-  }
-
-  .story-phone {
-    width: min(210px, 27vh);
-  }
-
-  .story-screen {
-    border-radius: 37px;
-  }
-
-  .story-phone .device-speaker {
-    top: 14px;
-    height: 22px;
-  }
-
-  .visual-caption {
-    bottom: 4%;
+    display: none;
   }
 
   .story-content {
-    margin-top: -10vh;
-    padding-block: 0 15vh;
+    padding-block: 90px 80px;
+    display: grid;
+    gap: 24px;
   }
 
   .story-step {
-    min-height: 70vh;
-    padding: 35vh 8px 8vh 55px;
+    min-height: 0;
+    padding: 52px 38px;
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 34px;
+    background:
+      radial-gradient(circle at 50% 24%, rgba(48, 164, 201, 0.11), transparent 30%),
+      linear-gradient(150deg, rgba(13, 28, 42, 0.92), rgba(5, 12, 21, 0.97));
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.045);
+    opacity: 1;
+    transform: none;
   }
 
-  .story-step::before {
-    left: 15px;
-  }
-
+  .story-step::before,
   .story-step::after {
-    left: 12px;
+    display: none;
+  }
+
+  .mobile-story-device {
+    margin: 0 auto 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mobile-story-device .device.iphone {
+    width: min(250px, 58vw);
+  }
+
+  .mobile-story-device .device-speaker {
+    z-index: 3;
+  }
+
+  .mobile-story-device p {
+    margin: 22px 0 0;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    background: rgba(4, 11, 19, 0.72);
+    font-size: 0.66rem;
+    white-space: nowrap;
   }
 
   .story-step h3 {
-    font-size: clamp(2.4rem, 9vw, 4rem);
+    font-size: clamp(2.4rem, 7.5vw, 4rem);
   }
 
   .section-heading-row {
@@ -2658,11 +2687,115 @@ body:not(.landing-page) {
     padding-block: 140px 100px;
   }
 
+  .swipe-guide {
+    margin: 42px 0 17px;
+    padding: 15px 16px;
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid rgba(104, 217, 244, 0.2);
+    border-radius: 20px;
+    background:
+      linear-gradient(135deg, rgba(45, 157, 192, 0.11), rgba(21, 55, 88, 0.06));
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .swipe-gesture {
+    position: relative;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(143, 226, 246, 0.58);
+    font-size: 1rem;
+  }
+
+  .swipe-gesture::before {
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    left: 13px;
+    height: 1px;
+    content: "";
+    background: rgba(104, 217, 244, 0.17);
+  }
+
+  .swipe-gesture i {
+    position: relative;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(143, 226, 246, 0.32);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, var(--aqua) 0 3px, transparent 4px),
+      rgba(31, 107, 139, 0.2);
+    box-shadow: 0 0 18px rgba(104, 217, 244, 0.12);
+    animation: swipe-hint 1.8s var(--ease-out) infinite;
+  }
+
+  .swipe-guide-copy {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .swipe-guide-copy strong {
+    font-size: 0.87rem;
+    font-weight: 620;
+  }
+
+  .swipe-guide-copy small {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.65rem;
+  }
+
+  .swipe-guide-copy b {
+    color: var(--aqua);
+    font-weight: 650;
+  }
+
+  .swipe-dots {
+    grid-column: 1 / -1;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .swipe-dots button {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(157, 203, 218, 0.25);
+    cursor: pointer;
+    transition:
+      width 0.3s var(--ease-out),
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .swipe-dots button.is-active {
+    width: 24px;
+    background: var(--aqua);
+    box-shadow: 0 0 10px rgba(104, 217, 244, 0.5);
+  }
+
   .watch-gallery {
     width: calc(100vw - 17px);
-    margin-top: 60px;
-    padding-right: 34px;
-    grid-auto-columns: minmax(285px, 76vw);
+    margin-top: 0;
+    padding: 8px 55px 38px 0;
+    grid-auto-columns: minmax(270px, 76vw);
+    gap: 15px;
+    scroll-padding-inline: 0 55px;
+  }
+
+  .gallery-hint {
+    display: none;
   }
 
   .bento-section {
@@ -2927,49 +3060,38 @@ body:not(.landing-page) {
     width: calc(100% - 26px);
   }
 
-  .story-visual {
-    top: 82px;
-    height: 49vh;
-    min-height: 410px;
-  }
-
-  .story-phone {
-    width: min(185px, 26vh);
-    border-radius: 39px !important;
-  }
-
-  .story-phone .story-screen {
-    border-radius: 33px;
-  }
-
-  .story-phone .device-speaker {
-    top: 12px;
-    height: 19px;
-  }
-
-  .visual-caption {
-    max-width: 95%;
-    bottom: 0;
-    overflow: hidden;
-    font-size: 0.61rem;
-    text-overflow: ellipsis;
-  }
-
   .story-content {
-    margin-top: -4vh;
+    padding-block: 75px 60px;
+    gap: 17px;
   }
 
   .story-step {
-    min-height: 71vh;
-    padding: 32vh 2px 9vh 40px;
+    padding: 34px 23px 38px;
+    border-radius: 27px;
   }
 
-  .story-step::before {
-    left: 9px;
+  .mobile-story-device {
+    margin-bottom: 34px;
   }
 
-  .story-step::after {
-    left: 6px;
+  .mobile-story-device .device.iphone {
+    width: min(224px, 68vw);
+    border-radius: 45px;
+  }
+
+  .mobile-story-device .device.iphone img {
+    border-radius: 38px;
+  }
+
+  .mobile-story-device .device-speaker {
+    top: 14px;
+    height: 23px;
+  }
+
+  .mobile-story-device p {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .story-step h3 {
@@ -3000,9 +3122,13 @@ body:not(.landing-page) {
     padding-block: 115px 80px;
   }
 
+  .swipe-guide {
+    margin-top: 34px;
+  }
+
   .watch-gallery {
-    margin-top: 48px;
-    grid-auto-columns: 82vw;
+    margin-top: 0;
+    grid-auto-columns: 76vw;
   }
 
   .watch-card {

@@ -92,6 +92,59 @@
     });
   });
 
+  const watchGallery = document.querySelector(".watch-gallery");
+  const watchCards = watchGallery
+    ? [...watchGallery.querySelectorAll(".watch-card")]
+    : [];
+  const watchDots = [...document.querySelectorAll("[data-watch-dot]")];
+  const watchIndex = document.querySelector("[data-watch-index]");
+  let watchScrollFrame = 0;
+
+  const updateWatchPagination = () => {
+    watchScrollFrame = 0;
+    if (!watchGallery || !watchCards.length) return;
+
+    const activeIndex = watchCards.reduce(
+      (bestIndex, card, index) =>
+        Math.abs(card.offsetLeft - watchGallery.scrollLeft) <
+        Math.abs(watchCards[bestIndex].offsetLeft - watchGallery.scrollLeft)
+          ? index
+          : bestIndex,
+      0,
+    );
+
+    if (watchIndex) watchIndex.textContent = String(activeIndex + 1);
+    watchDots.forEach((dot, index) => {
+      const isActive = index === activeIndex;
+      dot.classList.toggle("is-active", isActive);
+      if (isActive) dot.setAttribute("aria-current", "true");
+      else dot.removeAttribute("aria-current");
+    });
+  };
+
+  watchGallery?.addEventListener(
+    "scroll",
+    () => {
+      if (watchScrollFrame) return;
+      watchScrollFrame = requestAnimationFrame(updateWatchPagination);
+    },
+    { passive: true },
+  );
+
+  watchDots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const index = Number(dot.dataset.watchDot);
+      const card = watchCards[index];
+      if (!watchGallery || !card) return;
+      watchGallery.scrollTo({
+        left: card.offsetLeft,
+        behavior: reducedMotion.matches ? "auto" : "smooth",
+      });
+    });
+  });
+
+  updateWatchPagination();
+
   const counterElements = [...document.querySelectorAll("[data-counter]")];
 
   if (counterElements.length && "IntersectionObserver" in window) {
