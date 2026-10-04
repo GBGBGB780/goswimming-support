@@ -27,13 +27,47 @@ Expected public URLs:
 
 Use the Support and Privacy Policy URLs in App Store Connect.
 
+## Update an Existing GitHub Pages Site
+
+### GitHub website (easiest)
+
+1. Open `https://github.com/gbgbgb780/goswimming-support`.
+2. Upload the full contents of this folder, including `assets/`.
+3. Replace the existing files when prompted.
+4. Enter a commit message such as `Redesign public website`.
+5. Commit directly to `main`.
+6. Open **Actions** and wait for the Pages deployment to finish.
+7. Hard-refresh the public site to bypass the browser cache.
+
+### Git command line
+
+From a standalone clone of the `goswimming-support` repository:
+
+```bash
+git add .
+git commit -m "Redesign public website"
+git push origin main
+```
+
+Do not run those commands from the parent iOS project unless the support site is
+configured as its own repository or deployment workflow.
+
 ## Files
 
 - `index.html`: public landing page
 - `support.html`: App Store support page and contact information
 - `privacy.html`: bilingual privacy policy
 - `styles.css`: responsive site styling
+- `script.js`: scroll effects, animated waves, and interaction
 - `assets/app-icon.png`: Go Swimming icon
+- `assets/screens/`: optimized iPhone feature screenshots
+- `assets/watch/`: optimized Apple Watch screenshots
+
+## App Store
+
+The download buttons link to:
+
+`https://apps.apple.com/cn/app/go-swimming/id6812811647`
 
 ## Before Publishing
 
