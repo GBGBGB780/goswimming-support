@@ -48,6 +48,17 @@
     if (!step) return;
 
     const target = step.dataset.target;
+    const currentStep = document.querySelector(".story-step.is-active");
+    const currentScreen = document.querySelector(".story-screen.is-active");
+
+    if (
+      currentStep === step &&
+      currentScreen?.dataset.screen === target &&
+      storyVisual?.dataset.scene === target
+    ) {
+      return;
+    }
+
     storySteps.forEach((item) =>
       item.classList.toggle("is-active", item === step),
     );
@@ -77,6 +88,8 @@
   if (storySteps.length && "IntersectionObserver" in window) {
     const storyObserver = new IntersectionObserver(
       (entries) => {
+        if (window.innerWidth <= 860) return;
+
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -129,9 +142,37 @@
 
     const mobileVisualBottom =
       storyVisual?.getBoundingClientRect().bottom || window.innerHeight * 0.5;
+    let mostVisibleStoryStep = null;
+    let mostVisibleStoryAmount = 0;
+    let closestStoryStep = null;
+    let closestStoryDistance = Number.POSITIVE_INFINITY;
 
     storySteps.forEach((step, index) => {
       const rect = step.getBoundingClientRect();
+      const copyAnchor = step.querySelector(".step-number");
+      const copyEnd = step.querySelector(".micro-list");
+      const anchorTop = copyAnchor?.getBoundingClientRect().top;
+      const copyBottom = copyEnd?.getBoundingClientRect().bottom;
+
+      if (typeof anchorTop === "number") {
+        const distance = Math.abs(anchorTop - (mobileVisualBottom + 42));
+        if (distance < closestStoryDistance) {
+          closestStoryDistance = distance;
+          closestStoryStep = step;
+        }
+
+        if (typeof copyBottom === "number") {
+          const visibleTop = Math.max(anchorTop, mobileVisualBottom + 8);
+          const visibleBottom = Math.min(copyBottom, window.innerHeight - 16);
+          const visibleAmount = Math.max(0, visibleBottom - visibleTop);
+
+          if (visibleAmount > mostVisibleStoryAmount) {
+            mostVisibleStoryAmount = visibleAmount;
+            mostVisibleStoryStep = step;
+          }
+        }
+      }
+
       if (rect.bottom < 0 || rect.top > window.innerHeight) return;
 
       const centerOffset =
@@ -149,16 +190,20 @@
         `${(progress * direction * 1.6).toFixed(2)}deg`,
       );
 
-      const copyAnchor = step.querySelector(".step-number");
-      if (copyAnchor) {
-        const anchorTop = copyAnchor.getBoundingClientRect().top;
+      if (
+        copyAnchor &&
+        typeof anchorTop === "number" &&
+        typeof copyBottom === "number"
+      ) {
         const copyOpacity = Math.max(
           0,
-          Math.min(1, (anchorTop - mobileVisualBottom - 2) / 30),
+          Math.min(1, (copyBottom - mobileVisualBottom - 12) / 70),
         );
         step.style.opacity = copyOpacity.toFixed(3);
       }
     });
+
+    activateStory(mostVisibleStoryStep || closestStoryStep);
   };
 
   const requestMobileStoryParallax = () => {
@@ -172,6 +217,17 @@
   window.addEventListener("resize", requestMobileStoryParallax, {
     passive: true,
   });
+  window.addEventListener("load", requestMobileStoryParallax, {
+    once: true,
+  });
+  storyScreens.forEach((screen) => {
+    if (!screen.complete) {
+      screen.addEventListener("load", requestMobileStoryParallax, {
+        once: true,
+      });
+    }
+  });
+  document.fonts?.ready.then(requestMobileStoryParallax);
   requestMobileStoryParallax();
 
   document.querySelectorAll(".faq-list details").forEach((detail) => {

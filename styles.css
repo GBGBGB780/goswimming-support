@@ -2918,7 +2918,7 @@ body:not(.landing-page) {
   }
 
   .swipe-guide {
-    margin: 42px 0 17px;
+    margin: 12px 0 0;
     padding: 15px 16px;
     display: grid;
     grid-template-columns: 86px 1fr;
@@ -3018,7 +3018,7 @@ body:not(.landing-page) {
   .watch-gallery {
     width: calc(100vw - 17px);
     margin-top: 0;
-    padding: 8px 55px 38px 0;
+    padding: 8px 55px 20px 0;
     grid-auto-columns: minmax(270px, 76vw);
     gap: 15px;
     scroll-padding-inline: 0 55px;
@@ -3353,7 +3353,7 @@ body:not(.landing-page) {
   }
 
   .swipe-guide {
-    margin-top: 34px;
+    margin-top: 10px;
   }
 
   .watch-gallery {
@@ -3514,8 +3514,8 @@ body:not(.landing-page) {
 /* Mobile single-device scroll story */
 @media (max-width: 860px) {
   .story-section {
-    --story-stage-height: 44svh;
-    padding-top: 55px;
+    --story-stage-height: 35svh;
+    padding-top: 38px;
     background:
       radial-gradient(circle at 50% 18%, rgba(20, 140, 181, 0.11), transparent 28%),
       linear-gradient(180deg, transparent, rgba(6, 17, 29, 0.96) 8%, rgba(6, 17, 29, 0.96) 94%, transparent);
@@ -3533,7 +3533,7 @@ body:not(.landing-page) {
     z-index: 8;
     height: var(--story-stage-height);
     min-height: 0;
-    padding-bottom: 42px;
+    padding-bottom: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3548,10 +3548,10 @@ body:not(.landing-page) {
   .story-visual::after {
     position: absolute;
     right: -2px;
-    bottom: -38px;
+    bottom: -30px;
     left: -2px;
     z-index: 1;
-    height: 40px;
+    height: 32px;
     content: "";
     background: linear-gradient(180deg, rgba(6, 17, 29, 0.98), rgba(6, 17, 29, 0));
     pointer-events: none;
@@ -3575,7 +3575,7 @@ body:not(.landing-page) {
 
   .story-halo {
     z-index: 0;
-    width: min(380px, 92vw);
+    width: min(310px, 84vw);
     display: block;
     background:
       radial-gradient(circle, rgba(var(--scene-rgb), 0.18), rgba(var(--scene-rgb), 0.05) 43%, transparent 70%);
@@ -3588,16 +3588,17 @@ body:not(.landing-page) {
     border-color: rgba(var(--scene-rgb), 0.13);
   }
 
-  .story-phone {
+  .device.iphone.story-phone {
     z-index: 2;
-    width: min(158px, 18svh);
+    width: min(122px, 14.5svh);
+    padding: 4px;
     border-color: rgba(var(--scene-rgb), 0.46);
-    border-radius: 35px;
+    border-radius: 24px;
     box-shadow:
       0 38px 75px rgba(0, 0, 0, 0.58),
       0 0 65px rgba(var(--scene-rgb), 0.11),
       inset 0 1px rgba(255, 255, 255, 0.5);
-    transform: translateY(0) rotate(-1.4deg);
+    transform: translateY(0) rotate(-0.4deg);
     transition:
       transform 0.9s var(--ease-out),
       border-color 0.8s ease,
@@ -3605,31 +3606,31 @@ body:not(.landing-page) {
   }
 
   .story-visual[data-scene="plans"] .story-phone {
-    transform: translateY(-2px) rotate(1.5deg);
+    transform: translateY(-1px) rotate(0.45deg);
   }
 
   .story-visual[data-scene="ai"] .story-phone {
-    transform: translateY(1px) rotate(-1deg) scale(1.015);
+    transform: translateY(1px) rotate(-0.35deg);
   }
 
   .story-visual[data-scene="models"] .story-phone {
-    transform: translateY(-1px) rotate(1.2deg);
+    transform: translateY(-1px) rotate(0.4deg);
   }
 
   .story-visual[data-scene="profile"] .story-phone {
-    transform: translateY(0) rotate(-1.2deg);
+    transform: translateY(0) rotate(-0.3deg);
   }
 
   .story-phone .device-speaker {
-    top: 10px;
-    height: 17px;
+    top: 8px;
+    height: 13px;
   }
 
   .story-screen {
-    inset: 5px;
-    width: calc(100% - 10px) !important;
-    height: calc(100% - 10px) !important;
-    border-radius: 29px;
+    inset: 4px;
+    width: calc(100% - 8px) !important;
+    height: calc(100% - 8px) !important;
+    border-radius: 19px;
     filter: blur(3px);
     opacity: 0;
     transform: translateY(11px) scale(1.025);
@@ -3671,15 +3672,15 @@ body:not(.landing-page) {
 
   .story-content {
     margin-top: calc(var(--story-stage-height) * -1);
-    padding: 0 0 85px;
+    padding: 0 0 48px;
     display: block;
   }
 
   .story-step {
     --scene-rgb: 104, 217, 244;
-    min-height: 100svh;
+    min-height: 0;
     margin: 0;
-    padding: calc(var(--story-stage-height) + 126px) 8px 74px;
+    padding: calc(var(--story-stage-height) + 112px) 8px 46px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -3692,6 +3693,10 @@ body:not(.landing-page) {
     opacity: 0.34;
     transform: none;
     transition: opacity 0.65s ease;
+  }
+
+  .story-step + .story-step {
+    margin-top: calc(0px - var(--story-stage-height) - 74px);
   }
 
   .story-step:nth-child(2) {
@@ -3722,16 +3727,16 @@ body:not(.landing-page) {
 
   .story-step::before {
     position: absolute;
-    top: calc(var(--story-stage-height) + 92px);
+    top: calc(var(--story-stage-height) + 82px);
     right: 0;
-    bottom: 34px;
+    bottom: 20px;
     left: 0;
     z-index: 0;
     width: auto;
     height: auto;
     display: block;
     border: 1px solid rgba(var(--scene-rgb), 0.19);
-    border-radius: 28px;
+    border-radius: 24px;
     content: "";
     background:
       radial-gradient(circle at 84% 0%, rgba(var(--scene-rgb), 0.13), transparent 33%),
@@ -3748,7 +3753,7 @@ body:not(.landing-page) {
   .story-step::after,
   .story-step:nth-child(even)::after {
     position: absolute;
-    top: calc(var(--story-stage-height) + 116px);
+    top: calc(var(--story-stage-height) + 102px);
     right: 25px;
     bottom: auto;
     left: auto;
@@ -3776,14 +3781,14 @@ body:not(.landing-page) {
   }
 
   .story-step .step-number {
-    margin: 0 0 24px;
+    margin: 0 0 14px;
     color: rgba(var(--scene-rgb), 0.72);
   }
 
   .story-step .step-icon {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 20px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 14px;
     border-color: rgba(var(--scene-rgb), 0.26);
     color: rgb(var(--scene-rgb));
     background: rgba(var(--scene-rgb), 0.09);
@@ -3791,18 +3796,24 @@ body:not(.landing-page) {
 
   .story-step h3 {
     max-width: 520px;
-    font-size: clamp(2.1rem, 9vw, 3.3rem);
-    line-height: 1.08;
+    font-size: clamp(1.95rem, 7.8vw, 2.8rem);
+    line-height: 1.1;
   }
 
   .story-step > p:not(.step-number) {
-    margin-top: 22px;
-    font-size: 0.87rem;
-    line-height: 1.78;
+    margin-top: 16px;
+    font-size: 0.84rem;
+    line-height: 1.7;
   }
 
   .story-step .micro-list {
-    margin-top: 22px;
+    margin-top: 16px;
+    gap: 7px;
+  }
+
+  .story-step .micro-list li {
+    padding: 7px 10px;
+    font-size: 0.64rem;
   }
 }
 

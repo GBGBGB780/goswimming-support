@@ -12,8 +12,8 @@
   <title>Go Swimming · Apple Watch 游泳训练与本地 AI</title>
   <link rel="icon" href="assets/app-icon.png">
   <link rel="apple-touch-icon" href="assets/app-icon.png">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261005-4">
+  <script src="script.js?v=20261005-4" defer></script>
 </head>
 <body class="landing-page">
   <canvas class="water-canvas" aria-hidden="true"></canvas>
@@ -269,23 +269,6 @@
           </p>
         </div>
 
-        <div class="swipe-guide" aria-label="左右滑动查看五个 Apple Watch 界面">
-          <div class="swipe-gesture" aria-hidden="true">
-            <span>←</span><i></i><span>→</span>
-          </div>
-          <div class="swipe-guide-copy">
-            <strong>左右滑动查看</strong>
-            <small><b data-watch-index>1</b> / 5 个腕上界面</small>
-          </div>
-          <div class="swipe-dots" aria-label="Apple Watch 截图分页">
-            <button class="is-active" type="button" data-watch-dot="0" aria-label="查看第 1 个界面"></button>
-            <button type="button" data-watch-dot="1" aria-label="查看第 2 个界面"></button>
-            <button type="button" data-watch-dot="2" aria-label="查看第 3 个界面"></button>
-            <button type="button" data-watch-dot="3" aria-label="查看第 4 个界面"></button>
-            <button type="button" data-watch-dot="4" aria-label="查看第 5 个界面"></button>
-          </div>
-        </div>
-
         <div class="watch-gallery">
           <article class="watch-card reveal">
             <div class="watch-card-copy">
@@ -342,6 +325,22 @@
               <img src="assets/watch/heart-alert.webp" alt="Apple Watch 心率训练提醒" loading="lazy">
             </div>
           </article>
+        </div>
+        <div class="swipe-guide" aria-label="左右滑动查看五个 Apple Watch 界面">
+          <div class="swipe-gesture" aria-hidden="true">
+            <span>←</span><i></i><span>→</span>
+          </div>
+          <div class="swipe-guide-copy">
+            <strong>左右滑动查看</strong>
+            <small><b data-watch-index>1</b> / 5 个腕上界面</small>
+          </div>
+          <div class="swipe-dots" aria-label="Apple Watch 截图分页">
+            <button class="is-active" type="button" data-watch-dot="0" aria-label="查看第 1 个界面"></button>
+            <button type="button" data-watch-dot="1" aria-label="查看第 2 个界面"></button>
+            <button type="button" data-watch-dot="2" aria-label="查看第 3 个界面"></button>
+            <button type="button" data-watch-dot="3" aria-label="查看第 4 个界面"></button>
+            <button type="button" data-watch-dot="4" aria-label="查看第 5 个界面"></button>
+          </div>
         </div>
         <p class="gallery-hint reveal">横向滑动查看更多 <span aria-hidden="true">→</span></p>
       </div>
