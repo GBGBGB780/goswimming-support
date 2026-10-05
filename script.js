@@ -42,6 +42,7 @@
   const storySteps = [...document.querySelectorAll(".story-step")];
   const storyScreens = [...document.querySelectorAll(".story-screen")];
   const storyCaption = document.querySelector("[data-story-caption]");
+  const storyVisual = document.querySelector(".story-visual");
 
   const activateStory = (step) => {
     if (!step) return;
@@ -53,6 +54,7 @@
     storyScreens.forEach((screen) =>
       screen.classList.toggle("is-active", screen.dataset.screen === target),
     );
+    if (storyVisual) storyVisual.dataset.scene = target;
 
     if (storyCaption && step.dataset.caption) {
       storyCaption.animate(
@@ -65,6 +67,12 @@
       storyCaption.textContent = step.dataset.caption;
     }
   };
+
+  if (storyVisual && !storyVisual.dataset.scene) {
+    storyVisual.dataset.scene =
+      document.querySelector(".story-step.is-active")?.dataset.target ||
+      "summary";
+  }
 
   if (storySteps.length && "IntersectionObserver" in window) {
     const storyObserver = new IntersectionObserver(
@@ -82,6 +90,89 @@
 
     storySteps.forEach((step) => storyObserver.observe(step));
   }
+
+  if (storySteps.length) {
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+      storySteps.forEach((step) => step.classList.add("is-mobile-visible"));
+    } else {
+      const mobileStoryObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-mobile-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          rootMargin: "0px 0px -10% 0px",
+          threshold: 0.12,
+        },
+      );
+
+      storySteps.forEach((step) => mobileStoryObserver.observe(step));
+    }
+  }
+
+  let storyParallaxFrame = 0;
+
+  const updateMobileStoryParallax = () => {
+    storyParallaxFrame = 0;
+
+    if (reducedMotion.matches || window.innerWidth > 860) {
+      storySteps.forEach((step) => {
+        step.style.removeProperty("--mobile-parallax");
+        step.style.removeProperty("--mobile-tilt");
+        step.style.removeProperty("opacity");
+      });
+      return;
+    }
+
+    const mobileVisualBottom =
+      storyVisual?.getBoundingClientRect().bottom || window.innerHeight * 0.5;
+
+    storySteps.forEach((step, index) => {
+      const rect = step.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+      const centerOffset =
+        (rect.top + rect.height / 2 - window.innerHeight / 2) /
+        window.innerHeight;
+      const progress = Math.max(-1, Math.min(1, centerOffset));
+      const direction = index % 2 === 0 ? 1 : -1;
+
+      step.style.setProperty(
+        "--mobile-parallax",
+        `${(-progress * 14).toFixed(2)}px`,
+      );
+      step.style.setProperty(
+        "--mobile-tilt",
+        `${(progress * direction * 1.6).toFixed(2)}deg`,
+      );
+
+      const copyAnchor = step.querySelector(".step-number");
+      if (copyAnchor) {
+        const anchorTop = copyAnchor.getBoundingClientRect().top;
+        const copyOpacity = Math.max(
+          0,
+          Math.min(1, (anchorTop - mobileVisualBottom - 2) / 30),
+        );
+        step.style.opacity = copyOpacity.toFixed(3);
+      }
+    });
+  };
+
+  const requestMobileStoryParallax = () => {
+    if (storyParallaxFrame) return;
+    storyParallaxFrame = requestAnimationFrame(updateMobileStoryParallax);
+  };
+
+  window.addEventListener("scroll", requestMobileStoryParallax, {
+    passive: true,
+  });
+  window.addEventListener("resize", requestMobileStoryParallax, {
+    passive: true,
+  });
+  requestMobileStoryParallax();
 
   document.querySelectorAll(".faq-list details").forEach((detail) => {
     detail.addEventListener("toggle", () => {
