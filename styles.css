@@ -232,7 +232,7 @@ a {
   width: min(calc(100% - 48px), 1380px);
   min-height: max(790px, 100svh);
   margin-inline: auto;
-  padding: 145px max(0px, calc((100% - 1240px) / 2)) 80px;
+  padding: 145px clamp(0px, calc((100vw - 1240px) / 2), 70px) 80px;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(430px, 1.1fr);
   align-items: center;
